@@ -10,7 +10,7 @@ export interface {{{name}}}{{>extends}} {
      * {{{description}}}
      */
     {{/if}}
-    {{>isReadOnly}}{{{name}}}{{>isRequired}}: {{>type parent=../name}};
+    {{>isReadOnly}}{{{name}}}{{>isRequired}}: {{#if @root.useDateType}}{{#equals format 'date-time'}}Date{{else equals format 'date'}}Date{{else}}{{>type parent=../name}}{{/equals}}{{~else~}}{{>type parent=../name}}{{/if}};
     {{/each}}
 }
 {{#if enums}}
