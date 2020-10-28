@@ -17,6 +17,10 @@ import { Templates } from './registerHandlebarTemplates';
 export async function writeClientModels(models: Model[], templates: Templates, outputPath: string, httpClient: HttpClient, useUnionTypes: boolean, useDateType: boolean): Promise<void> {
     for (const model of models) {
         const file = path.resolve(outputPath, `${model.name}.ts`);
+        if (useDateType) {
+            console.log('start type conversion');
+            model.properties = conditionalTypeOverride(model.properties);
+        }
         const templateResult = templates.exports.model({
             ...model,
             httpClient,
@@ -25,3 +29,27 @@ export async function writeClientModels(models: Model[], templates: Templates, o
         await writeFile(file, format(templateResult));
     }
 }
+
+const formatDate = ['date', 'date-time'];
+const conditionalTypeOverride = (properties: Model[]): Model[] => {
+    return properties.map(model => {
+        if (model.name === 'ElementItem') {
+            console.log(model);
+        }
+        if (model.properties.length > 0) {
+            console.log({ text: 'has children', name: model.name });
+            model.properties = conditionalTypeOverride(model.properties);
+        }
+        // if (model.export !== 'interface') {
+        //     return model;
+        // }
+        if (model.format === undefined) {
+            return model;
+        }
+        if (formatDate.includes(model.format)) {
+            console.log({ text: 'has format', model });
+            return { ...model, type: 'Date' };
+        }
+        return model;
+    });
+};
