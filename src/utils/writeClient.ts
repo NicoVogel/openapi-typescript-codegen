@@ -34,7 +34,8 @@ export async function writeClient(
     exportCore: boolean,
     exportServices: boolean,
     exportModels: boolean,
-    exportSchemas: boolean
+    exportSchemas: boolean,
+    useDateType: boolean
 ): Promise<void> {
     const outputPath = path.resolve(process.cwd(), output);
     const outputPathCore = path.resolve(outputPath, 'core');
@@ -66,7 +67,7 @@ export async function writeClient(
 
     if (exportModels) {
         await mkdir(outputPathModels);
-        await writeClientModels(client.models, templates, outputPathModels, httpClient, useUnionTypes);
+        await writeClientModels(client.models, templates, outputPathModels, httpClient, useUnionTypes, useDateType);
     }
 
     await writeClientIndex(client, templates, outputPath, useUnionTypes, exportCore, exportServices, exportModels, exportSchemas);
