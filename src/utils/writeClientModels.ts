@@ -1,3 +1,4 @@
+import { fstat, writeFileSync } from 'fs';
 import * as path from 'path';
 
 import type { Model } from '../client/interfaces/Model';
@@ -15,12 +16,11 @@ import { Templates } from './registerHandlebarTemplates';
  * @param useUnionTypes Use union types instead of enums
  */
 export async function writeClientModels(models: Model[], templates: Templates, outputPath: string, httpClient: HttpClient, useUnionTypes: boolean, useDateType: boolean): Promise<void> {
+    if (useDateType) {
+        models = dateTypeOverride(models);
+    }
     for (const model of models) {
         const file = path.resolve(outputPath, `${model.name}.ts`);
-        if (useDateType) {
-            console.log('start type conversion');
-            model.properties = conditionalTypeOverride(model.properties);
-        }
         const templateResult = templates.exports.model({
             ...model,
             httpClient,
@@ -31,25 +31,24 @@ export async function writeClientModels(models: Model[], templates: Templates, o
 }
 
 const formatDate = ['date', 'date-time'];
-const conditionalTypeOverride = (properties: Model[]): Model[] => {
-    return properties.map(model => {
-        if (model.name === 'ElementItem') {
-            console.log(model);
+function dateTypeOverride(properties: Model[]): Model[] {
+    return properties.map(prop => {
+        if (prop.export === 'interface') {
+            prop.properties = dateTypeOverride(prop.properties);
+            return prop;
         }
-        if (model.properties.length > 0) {
-            console.log({ text: 'has children', name: model.name });
-            model.properties = conditionalTypeOverride(model.properties);
+        if (prop.export === 'array') {
+            if (prop.link !== null) {
+                prop.link.properties = dateTypeOverride(prop.link.properties);
+            }
+            return prop;
         }
-        // if (model.export !== 'interface') {
-        //     return model;
-        // }
-        if (model.format === undefined) {
-            return model;
+        if (prop.format === undefined) {
+            return prop;
         }
-        if (formatDate.includes(model.format)) {
-            console.log({ text: 'has format', model });
-            return { ...model, type: 'Date' };
+        if (formatDate.includes(prop.format)) {
+            prop.base = 'Date';
         }
-        return model;
+        return prop;
     });
 };
