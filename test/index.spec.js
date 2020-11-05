@@ -45,3 +45,25 @@ describe('v3', () => {
         });
     });
 });
+
+describe('v3 datetype', () => {
+    it('should generate files and apply the Date type to interfaces with the string format "date" or "date-time"', async () => {
+        await OpenAPI.generate({
+            input: './test/spec/v3_datetype.yaml',
+            output: './test/generated/v3_datetype/',
+            httpClient: OpenAPI.HttpClient.FETCH,
+            useOptions: true,
+            useUnionTypes: true,
+            exportCore: true,
+            exportSchemas: true,
+            exportModels: true,
+            exportServices: true,
+            useDateType: true,
+        });
+
+        glob.sync('./test/generated/v3_datetype/**/*.ts').forEach(file => {
+            const content = fs.readFileSync(file, 'utf8').toString();
+            expect(content).toMatchSnapshot(file);
+        });
+    });
+});
