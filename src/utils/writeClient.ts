@@ -2,6 +2,7 @@ import * as path from 'path';
 
 import type { Client } from '../client/interfaces/Client';
 import { HttpClient } from '../index';
+import { dateTypeOverride } from './dateTypeOverride';
 import { mkdir, rmdir } from './fileSystem';
 import { isSubDirectory } from './isSubdirectory';
 import { Templates } from './registerHandlebarTemplates';
@@ -67,7 +68,10 @@ export async function writeClient(
 
     if (exportModels) {
         await mkdir(outputPathModels);
-        await writeClientModels(client.models, templates, outputPathModels, httpClient, useUnionTypes, useDateType);
+        if (useDateType) {
+            client.models = dateTypeOverride(client.models);
+        }
+        await writeClientModels(client.models, templates, outputPathModels, httpClient, useUnionTypes);
     }
 
     await writeClientIndex(client, templates, outputPath, useUnionTypes, exportCore, exportServices, exportModels, exportSchemas);
