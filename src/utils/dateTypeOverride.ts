@@ -6,23 +6,33 @@ const formatDate = ['date', 'date-time'];
  * @param properties Array of Models
  */
 export function dateTypeOverride(properties: Model[]): Model[] {
-    return properties.map(prop => {
-        if (prop.export === 'interface') {
-            prop.properties = dateTypeOverride(prop.properties);
-            return prop;
+    return properties.map(property => {
+        if (property.export === 'interface') {
+            const properties = dateTypeOverride(property.properties);
+            return { ...property, properties };
         }
-        if (prop.export === 'array') {
-            if (prop.link !== null) {
-                prop.link.properties = dateTypeOverride(prop.link.properties);
+
+        if (property.export === 'array') {
+            const link = cloneObject(property.link);
+            if (link !== null) {
+                link.properties = dateTypeOverride(link.properties);
             }
-            return prop;
+            return { ...property, link };
         }
-        if (prop.format === undefined) {
-            return prop;
+
+        if (property.base !== 'string' || property.format === undefined) {
+            return { ...property };
         }
-        if (formatDate.includes(prop.format)) {
-            prop.base = 'Date';
+
+        let base = property.base;
+        if (formatDate.includes(property.format)) {
+            base = 'Date';
         }
-        return prop;
+
+        return { ...property, base };
     });
+}
+
+function cloneObject<T>(object: T): T {
+    return { ...object };
 }
