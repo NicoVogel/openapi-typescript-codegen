@@ -1,6 +1,6 @@
 import { Model } from '../client/interfaces/Model';
 
-const formatDate = ['date', 'date-time'];
+const formatDate = ['date-time'];
 /**
  * Change Model.base if it is a string and has the format 'date-time'
  * @param properties Array of Models
