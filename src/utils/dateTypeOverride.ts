@@ -1,4 +1,4 @@
-import { Model } from '../client/interfaces/Model';
+import { Model } from '../client/interfaces/Model.d';
 
 const formatDate = ['date-time'];
 /**
