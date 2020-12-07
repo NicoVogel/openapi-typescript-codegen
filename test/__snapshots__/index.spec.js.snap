@@ -2211,7 +2211,7 @@ export class TypesService {
 }"
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/core/ApiError.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/core/ApiError.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -2234,7 +2234,7 @@ export class ApiError extends Error {
 }"
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/core/ApiRequestOptions.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/core/ApiRequestOptions.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -2251,7 +2251,7 @@ export interface ApiRequestOptions {
 }"
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/core/ApiResult.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/core/ApiResult.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -2264,7 +2264,7 @@ export interface ApiResult {
 }"
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/core/OpenAPI.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/core/OpenAPI.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -2283,7 +2283,7 @@ export const OpenAPI: Config = {
 };"
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/core/request.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/core/request.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -2474,7 +2474,7 @@ export async function request(options: ApiRequestOptions): Promise<ApiResult> {
 "
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/index.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/index.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -2493,21 +2493,21 @@ export { $WrappedInArray } from './schemas/$WrappedInArray';
 "
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/models/ExampleType.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/models/ExampleType.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 export interface ExampleType {
     id?: number;
     dateTime?: Date;
-    date?: Date;
-    dateTimeNullable?: Date | null;
-    dateNullable?: Date | null;
+    date?: string;
+    dateTimeNullable?: string | null;
+    dateNullable?: string | null;
 }
 "
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/models/InheritType.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/models/InheritType.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -2519,7 +2519,7 @@ export interface InheritType extends ParentType, ExampleType {
 "
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/models/ParentType.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/models/ParentType.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -2529,19 +2529,19 @@ export interface ParentType {
 "
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/models/WrappedInArray.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/models/WrappedInArray.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
 export type WrappedInArray = Array<{
     dateTime?: Date,
-    date?: Date,
-    dateTimeNullable?: Date | null,
-    dateNullable?: Date | null,
+    date?: string,
+    dateTimeNullable?: string | null,
+    dateNullable?: string | null,
 }>;"
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/schemas/$ExampleType.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/schemas/$ExampleType.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -2572,7 +2572,7 @@ export const $ExampleType = {
 };"
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/schemas/$InheritType.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/schemas/$InheritType.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -2587,7 +2587,7 @@ export const $InheritType = {
 };"
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/schemas/$ParentType.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/schemas/$ParentType.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
@@ -2601,7 +2601,7 @@ export const $ParentType = {
 };"
 `;
 
-exports[`v3 datetype should generate: ./test/generated/v3_datetype/schemas/$WrappedInArray.ts 1`] = `
+exports[`v3 datetype should generate files and apply the Date type to interfaces with the string format "date-time": ./test/generated/v3_datetype/schemas/$WrappedInArray.ts 1`] = `
 "/* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
