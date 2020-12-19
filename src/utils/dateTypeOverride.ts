@@ -3,33 +3,33 @@ import { Model } from '../client/interfaces/Model.d';
 const formatDate = ['date-time'];
 /**
  * Change Model.base if it is a string and has the format 'date-time'
- * @param properties Array of Models
+ * @param models Array of Models
  */
-export function dateTypeOverride(properties: Model[]): Model[] {
-    return properties.map(property => {
-        if (property.export === 'interface') {
-            const properties = dateTypeOverride(property.properties);
-            return { ...property, properties };
+export function dateTypeOverride(models: Model[]): Model[] {
+    return models.map(model => {
+        if (model.export === 'interface') {
+            return { ...model, properties: dateTypeOverride(model.properties) };
         }
 
-        if (property.export === 'array') {
-            const link = cloneObject(property.link);
-            if (link !== null) {
+        if (model.export === 'array') {
+            if (model.link !== null) {
+                const link = cloneObject(model.link);
                 link.properties = dateTypeOverride(link.properties);
+                return { ...model, link };
             }
-            return { ...property, link };
+            return { ...model };
         }
 
-        if (property.base !== 'string' || property.format === undefined) {
-            return { ...property };
+        if (model.base !== 'string' || model.format === undefined) {
+            return { ...model };
         }
 
-        let base = property.base;
-        if (formatDate.includes(property.format)) {
+        let base = model.base;
+        if (formatDate.includes(model.format)) {
             base = 'Date';
         }
 
-        return { ...property, base };
+        return { ...model, base };
     });
 }
 
