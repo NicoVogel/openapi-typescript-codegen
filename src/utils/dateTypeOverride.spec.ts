@@ -1,8 +1,15 @@
-import type { Model } from '../client/interfaces/Model';
+import { dateTypeOverride, RequiredFields } from './dateTypeOverride';
 
 describe('dateTypeOverride', () => {
-    it('sucess', async () => {
+    it('should replace the base type for the model combination {base: "string", format: "data-time"}', async () => {
+        const expected = JSON.parse(JSON.stringify(models)) as RequiredFields<ModelOnlyName>[];
+        expected[1].properties[1].base = 'Date';
+        if (expected[3].link?.properties[0].base) {
+            expected[3].link.properties[0].base = 'Date';
+        }
 
+        const result = dateTypeOverride(models);
+        expect(result).toEqual(expected);
     });
 });
 
