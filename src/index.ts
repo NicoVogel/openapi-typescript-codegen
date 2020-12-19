@@ -13,7 +13,7 @@ export enum HttpClient {
     NODE = 'node',
 }
 
-export interface Options {
+export type Options = {
     input: string | Record<string, any>;
     output: string;
     httpClient?: HttpClient;
@@ -25,7 +25,7 @@ export interface Options {
     exportSchemas?: boolean;
     write?: boolean;
     useDateType?: boolean;
-}
+};
 
 /**
  * Generate the OpenAPI client. This method will read the OpenAPI specification and based on the
